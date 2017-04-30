@@ -87,7 +87,7 @@ public class Calendrier implements ActionListener {
 		// Construction du panneau calendrier
 		calPane = new PanelCalendrier(jourSelected, moisSelected, anneeSelected);
 		frame.getContentPane().add(calPane);
-		calPane.setBounds(10, 93, 452, 382);
+		calPane.setBounds(10, 55, 452, 382);
 		
 		if (evt.getSource() == moisCbx || evt.getSource() == anneeCbx) {
 			jourCbx.removeAllItems();
@@ -145,7 +145,7 @@ public class Calendrier implements ActionListener {
 		
 		calPane = new PanelCalendrier(jourCourant, moisCourant, anneeCourant);
 		calPane.setBackground(Color.WHITE);
-		calPane.setBounds(10, 93, 452, 382);
+		calPane.setBounds(10, 55, 452, 382);
 		frame.getContentPane().add(calPane);
 		
 		
@@ -156,7 +156,7 @@ public class Calendrier implements ActionListener {
 				frame.getContentPane().repaint();
 				frame.remove(calPane);
 				calPane = new PanelCalendrier(jourCourant, moisCourant, anneeCourant);
-				calPane.setBounds(10, 93, 452, 382);
+				calPane.setBounds(10, 55, 452, 382);
 				jourCbx.setSelectedItem(jourCourant);
 				moisCbx.setSelectedItem(listeMois[moisCourant]);
 				anneeCbx.setSelectedItem(anneeCourant);
@@ -164,7 +164,7 @@ public class Calendrier implements ActionListener {
 			}
 		});
 		//positionnment du bouton
-		dateAjourdhui.setBounds(175, 55, 127, 30);
+		dateAjourdhui.setBounds(175, 445, 127, 30);
 		frame.getContentPane().add(dateAjourdhui);
 	}
 	
