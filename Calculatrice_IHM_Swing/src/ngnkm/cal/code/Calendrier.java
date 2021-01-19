@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -45,6 +47,8 @@ public class Calendrier implements ActionListener {
 	@SuppressWarnings("rawtypes")
 	private JComboBox moisCbx, anneeCbx, jourCbx;
 	private JButton dateAjourdhui;
+	private JButton nextMonth;
+	private JButton lastMonth;
 	
 	/**
 	 * Lancement de l'application
@@ -109,10 +113,11 @@ public class Calendrier implements ActionListener {
 
 		//Configuration du Frame
 		frame = new JFrame("Calendrier Gregorien");
-		frame.setBounds(100, 100, 486, 525);
+		frame.setBounds(1000, 200, 490, 550);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setBackground(Color.RED);
 
 		//initalisation des controles
 		anneeCbx = new JComboBox();
@@ -156,7 +161,7 @@ public class Calendrier implements ActionListener {
 				frame.getContentPane().repaint();
 				frame.remove(calPane);
 				calPane = new PanelCalendrier(jourCourant, moisCourant, anneeCourant);
-				calPane.setBounds(10, 55, 452, 382);
+				calPane.setBounds(10, 55, 50, 50);
 				jourCbx.setSelectedItem(jourCourant);
 				moisCbx.setSelectedItem(listeMois[moisCourant]);
 				anneeCbx.setSelectedItem(anneeCourant);
@@ -166,6 +171,56 @@ public class Calendrier implements ActionListener {
 		//positionnment du bouton
 		dateAjourdhui.setBounds(175, 445, 127, 30);
 		frame.getContentPane().add(dateAjourdhui);
+		
+		
+		nextMonth = new JButton("Next Month");
+		nextMonth.setBackground(Color.blue);
+		nextMonth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.getContentPane().repaint();
+				frame.remove(calPane);
+				calPane = new PanelCalendrier(jourCourant, moisCourant, anneeCourant);
+				calPane.setBounds(10, 55, 50, 50);
+				jourCbx.setSelectedItem(jourCourant);
+				if (moisCourant == 11) {
+				moisCbx.setSelectedItem(listeMois[0]);
+				anneeCbx.setSelectedItem(anneeCourant + 1);
+				}
+				else {
+					moisCbx.setSelectedItem(listeMois[moisCourant + 1]);
+					anneeCbx.setSelectedItem(anneeCourant);
+				}
+				frame.getContentPane().add(calPane);
+			}
+		});
+		//positionnment du bouton
+		nextMonth.setBounds(300, 445, 127, 30);
+		frame.getContentPane().add(nextMonth);
+		
+		
+		lastMonth = new JButton("Last Month");
+		lastMonth.setBackground(Color.green);
+		lastMonth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.getContentPane().repaint();
+				frame.remove(calPane);
+				calPane = new PanelCalendrier(jourCourant, moisCourant, anneeCourant);
+				calPane.setBounds(10, 55, 50, 50);
+				jourCbx.setSelectedItem(jourCourant);
+				if (moisCourant == 0) {
+					moisCbx.setSelectedItem(listeMois[11]);
+					anneeCbx.setSelectedItem(anneeCourant - 1);}
+					else {
+						moisCbx.setSelectedItem(listeMois[moisCourant - 1]);
+						anneeCbx.setSelectedItem(anneeCourant);
+					}
+				frame.getContentPane().add(calPane);
+			}
+		});
+		//positionnment du bouton
+		lastMonth.setBounds(50, 445, 127, 30);
+		frame.getContentPane().add(lastMonth);
+		
 	}
 	
 	// mettre anneeSelected jour et distinction des annees bissextiles
