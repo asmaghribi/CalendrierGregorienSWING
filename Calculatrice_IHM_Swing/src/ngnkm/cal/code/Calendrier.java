@@ -49,7 +49,7 @@ public class Calendrier implements ActionListener {
 	private JButton dateAjourdhui;
 	private JButton nextMonth;
 	private JButton lastMonth;
-	
+	private JButton evennement;
 	/**
 	 * Lancement de l'application
 	 * @param args
@@ -113,7 +113,7 @@ public class Calendrier implements ActionListener {
 
 		//Configuration du Frame
 		frame = new JFrame("Calendrier Gregorien");
-		frame.setBounds(1000, 200, 490, 550);
+		frame.setBounds(100, 100, 490, 600);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -234,6 +234,23 @@ public class Calendrier implements ActionListener {
 			jourCbx.addItem(i);
 
 		}
-	}
+		  evennement = new JButton("Evennements");
+			evennement.setBackground(Color.black);
+			evennement.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					frame.getContentPane().repaint();
+				     frame.add(evennement);
+					calPane.setBounds(10, 55, 452, 382);
+					frame.getContentPane().add(calPane);
+					
+				evennements ev = new evennements();
+				ev.setVisible(true);
+					
+				
+			}
 
-}
+			});
+			evennement.setBounds(175, 500, 127, 30);
+			frame.getContentPane().add(evennement);
+			}}
