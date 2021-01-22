@@ -1,7 +1,7 @@
 package ngnkm.cal.code;
-
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  * 
@@ -50,6 +51,7 @@ public class Calendrier implements ActionListener {
 	private JButton nextMonth;
 	private JButton lastMonth;
 	private JButton evennement;
+	private JLabel label1 = new JLabel(" ");
 	/**
 	 * Lancement de l'application
 	 * @param args
@@ -80,18 +82,40 @@ public class Calendrier implements ActionListener {
 	public Calendrier() {
 		initialize();
 	}
-
+	/**
+	 * Creationn de la méthode Jourferie qui permet de distinguer 
+	 * les jours fériés
+	 */
+    public void JourFerie(String x,String y)
+    {
+    	if (x.equals("1")&&(y.equals("Janvier"))){label1.setText("New Year's Day");}
+		else if (x.equals("14")&&(y.equals("Janvier"))){label1.setText("Revolution and Youth Day");}
+		else if (x.equals("20")&&(y.equals("Mars"))){label1.setText("Independence Day");}
+		else if (x.equals("9")&&(y.equals("Avril"))){label1.setText("Martyrs Day");}
+		else if (x.equals("1")&&(y.equals("Mai"))){label1.setText("Labor Day");}
+		else if (x.equals("25")&&(y.equals("Juillet"))){label1.setText("Republic Day");}
+		else if (x.equals("10")&&(y.equals("Aout"))){label1.setText("Hegira New Year's Day");}
+		else if (x.equals("13")&&(y.equals("Aout"))){label1.setText("Woman's Day");}
+		else if (x.equals("15")&&(y.equals("Octobre"))){label1.setText("Evacuation party");}
+		else if (x.equals("19")&&(y.equals("Octobre"))){label1.setText("Mouled");}
+		else{label1.setText("No Event");}
+    }
 	public void actionPerformed(ActionEvent evt) {
 		frame.getContentPane().repaint();
 		frame.remove(calPane);
 		int moisSelected = moisCbx.getSelectedIndex();
 		int anneeSelected = anneeCbx.getSelectedIndex() + anneeInit;
 		int jourSelected = jourCbx.getSelectedIndex() + 1;
+		String x = String.valueOf(jourCbx.getSelectedItem());
+		String y = String.valueOf(moisCbx.getSelectedItem());
 
 		// Construction du panneau calendrier
 		calPane = new PanelCalendrier(jourSelected, moisSelected, anneeSelected);
 		frame.getContentPane().add(calPane);
 		calPane.setBounds(10, 55, 452, 382);
+		
+		//Appel de la methode JourFerie
+		JourFerie(x,y);
 		
 		if (evt.getSource() == moisCbx || evt.getSource() == anneeCbx) {
 			jourCbx.removeAllItems();
@@ -112,8 +136,8 @@ public class Calendrier implements ActionListener {
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
 
 		//Configuration du Frame
-		frame = new JFrame("Calendrier Gregorien");
-		frame.setBounds(100, 100, 490, 600);
+		frame = new JFrame("Gregorien Calendar");
+		frame.setBounds(100, 100, 486, 600);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -220,6 +244,21 @@ public class Calendrier implements ActionListener {
 		//positionnment du bouton
 		lastMonth.setBounds(50, 445, 127, 30);
 		frame.getContentPane().add(lastMonth);
+		
+		
+		label1.setFont(new Font("Serif", Font.BOLD, 16));
+		label1.setForeground(Color.magenta);
+		
+		//positionnment du text du jour ferie
+		label1.setBounds(90, 0, 300, 20);
+		label1.setHorizontalAlignment(JLabel.CENTER);
+	
+		String y=listeMois[moisCourant];
+		String x=String.valueOf(jourCourant);
+		JourFerie(x,y);
+		frame.add(label1);
+		
+		
 		
 	}
 	
