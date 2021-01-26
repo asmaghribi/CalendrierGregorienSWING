@@ -37,7 +37,7 @@ public class PanelCalendrier extends JPanel{
 		
 	}
 	
-	public static final String[] jours = {"Lundi", "Mardi", "Mercredi", "  Jeudi", "Vendredi", "Samedi", "Dimache"};
+	public static final String[] jours = {"Monday", "Tuesday", " wednesday", "    Thursday", "  Friday", "Saturday", "Sunday"};
 	
 	public static int DernierJour[] = {
 									31, 28, 31, 30, /* Jan, fev, mars, avr*/
@@ -62,7 +62,7 @@ public class PanelCalendrier extends JPanel{
 		int ecartY = 50;
 
 		//ajuster le panneau
-		g.setColor(Color.BLACK);
+		g.setColor(Color.orange);
 		g.fillRect(0, 0, 500, 40);
 		
 		//Annee bissextile & mois de fevrier

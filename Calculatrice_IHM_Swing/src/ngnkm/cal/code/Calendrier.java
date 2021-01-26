@@ -1,5 +1,6 @@
 package ngnkm.cal.code;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+
+import com.sun.java.swing.plaf.motif.MotifBorders.BevelBorder;
+
 /**
  * 
  * @author ngnkm
@@ -24,10 +28,11 @@ public class Calendrier implements ActionListener {
 	/**
 	 * Initialiser les variables de la classe
 	 */
-	public static final String[] listeMois = {"Janvier", "Fevrier", "Mars", 
-										      "Avril", "Mai", "Juin", 
-										      "Juillet", "Aout","Septembre",
-										      "Octobre","Novembre","Decembre"};
+	public static final String[] listeMois = {"Januray", "February", "March", 
+		      "April", "May", "Jun", 
+		      "July", "August","September",
+		      "October","November","December"};
+
 	
 	public static int nombreDeJour[] = {
 									31, 28, 31, 30, /* Jan, fev, mars, avr*/
@@ -141,7 +146,9 @@ public class Calendrier implements ActionListener {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().setBackground(Color.RED);
+JLabel lblNewLabel = new JLabel(new ImageIcon("C:\\Users\\HP\\Desktop\background.jpg"));
+		
+		frame.setContentPane(lblNewLabel);
 
 		//initalisation des controles
 		anneeCbx = new JComboBox();
@@ -158,14 +165,14 @@ public class Calendrier implements ActionListener {
 		moisCbx.setBackground(Color.WHITE);
 		moisCbx.setSelectedItem(listeMois[moisCourant]);
 		moisCbx.addActionListener(this);
-		moisCbx.setBounds(182, 24, 104, 20);
+		moisCbx.setBounds(46, 24, 104, 20);
 		frame.getContentPane().add(moisCbx);
 
 		jourCbx = new JComboBox();
 		jourCbx.setForeground(Color.BLACK);
 		jourCbx.setBackground(Color.WHITE);
 		jourCbx.setSelectedItem(jourCourant);
-		jourCbx.setBounds(46, 24, 104, 20);
+		jourCbx.setBounds(182, 24, 104, 20);
 
 		metjour(anneeCourant, moisCourant);  //ajoute les jours dans la liste jourCbx
 		jourCbx.setSelectedIndex(jourCourant - 1);
@@ -178,14 +185,17 @@ public class Calendrier implements ActionListener {
 		frame.getContentPane().add(calPane);
 		
 		
-		dateAjourdhui = new JButton("Aujourd'hui");
-		dateAjourdhui.setBackground(Color.WHITE);
+		dateAjourdhui = new JButton("Today");
+		dateAjourdhui.setSize(new Dimension(400, 500));
+		dateAjourdhui.setFont(new Font("Sitka Small", Font.PLAIN, 12));
+		//dateAjourdhui.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		dateAjourdhui.setBackground(Color.orange);
 		dateAjourdhui.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.getContentPane().repaint();
 				frame.remove(calPane);
 				calPane = new PanelCalendrier(jourCourant, moisCourant, anneeCourant);
-				calPane.setBounds(10, 55, 50, 50);
+				calPane.setBounds(10, 55, 452, 382);
 				jourCbx.setSelectedItem(jourCourant);
 				moisCbx.setSelectedItem(listeMois[moisCourant]);
 				anneeCbx.setSelectedItem(anneeCourant);
